@@ -14,6 +14,14 @@ def fromWordleChannel(message):
         return True
     else:
         return False
+def fromSelf(message):
+    if (message.author == client.user):
+        return True
+    else:
+        return False 
+
+def worldFormat(message):
+    print(message)
 
 @client.event
 async def on_ready():
@@ -24,8 +32,11 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if(fromWordleChannel(message)):
-       await message.channel.send("hello")
+    if(fromWordleChannel(message) and not fromSelf(message)):
+        logging.info(message.content)
+        words = message.content.split()
+        print (words)
+    #    await message.channel.send("hello")
 # @client.event
 # async def on_message(message):
 #     if message.author == client.user:
