@@ -28,13 +28,14 @@ async def on_message(message):
             await message.channel.send(helper.toFiveCharLine("What "+ str(message.author.nick) + " meant to say was`" + str(message.content) +"`but they used the wrong format") )
             await message.delete()
     
-    if (str(message.channel) == 'g_fuel' and "quack" in message.content):
+    if (str(message.channel) == 'g_fuel' and "quack" in message.content.lower()):
         pic = random.randrange(1,11)
         with open('./quacks/'+str(pic)+'.webp', "rb") as fh:
             f = discord.File(fh, filename='./quacks/'+str(pic)+'.webp')
         await message.channel.send(file = f)
 
-
+    if (str(message.author.nick) == 'D-Wreck'):
+        await message.channel.send("Yeah I bet")
 
 
 client.run(api_key)
