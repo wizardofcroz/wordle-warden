@@ -34,8 +34,8 @@ async def on_message(message):
             f = discord.File(fh, filename='./quacks/'+str(pic)+'.webp')
         await message.channel.send(file = f)
 
-    if (str(message.author.nick) == 'D-Wreck'):
-        await message.channel.send("Yeah I bet")
+    # if (str(message.author.nick) == 'D-Wreck'):
+    #     await message.channel.send("Yeah I bet")
 
 
 client.run(api_key)
