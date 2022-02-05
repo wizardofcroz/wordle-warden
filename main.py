@@ -1,4 +1,7 @@
 import discord
+import secrets
+api_key = secrets.api_key
+
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -8,4 +11,4 @@ class MyClient(discord.Client):
         print('Message from {0.author}: {0.content}'.format(message))
 
 client = MyClient()
-client.run('my token goes here')
+client.run(api_key)
