@@ -1,14 +1,26 @@
 import discord
 import secrets
+import logging
 api_key = secrets.api_key
 
+client = discord.Client()
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.activity))
+@client.event
+async def on_ready():
+    print('Logged on as {0}!'.format(client))
+    for c in client.get_all_channels():
+        logging.warning('Name: %s\n \
+                      ID: %s\n',c.name,c.id)
+    # async def on_message(self, message):
+    #     print('Message from {0.author}: {0.content}'.format(message))
 
-    async def on_message(self, message):
-        print('Message from {0.author}: {0.content}'.format(message))
+# @client.event
+# async def on_message(message):
+#     if message.author == client.user:
+#         return
 
-client = MyClient()
+#     if message.content.startswith('$hello'):
+#         await message.channel.send('Hello!')
+
+
 client.run(api_key)
