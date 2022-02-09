@@ -42,8 +42,8 @@ async def on_message(message):
 async def send_message():
     if(datetime.now().time().hour == 20 and datetime.now().time().minute == 30):
         await client.get_channel('939204794051100712').send(helper.getWinners())
-    if(datetime.now().time().hour == 15 and datetime.now().time().minute == 15):
-        await client.get_channel('939204794051100712').send(helper.getWinners())
+    if(datetime.now().time().hour == 15 and datetime.now().time().minute == 22):
+        print("here")
 
 
 
