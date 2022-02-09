@@ -77,7 +77,7 @@ def getWinners():
             winners = winners +"\n`"+ p[0] + "`"
     file1.close()
 
-    print("Today's winners are "+ winners +"\nwith a score of "+str(topScore))
+    return ("Today's winners are "+ winners +"\nwith a score of "+str(topScore))
 
 
 
