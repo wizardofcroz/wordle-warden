@@ -38,7 +38,7 @@ async def on_message(message):
             f = discord.File(fh, filename='./quacks/'+str(pic)+'.webp')
         await message.channel.send(file = f)
 
-@tasks.loop(minute=1)
+@tasks.loop(minutes=1)
 async def send_message():
     if(datetime.now().time().hour == 20 and datetime.now().time().minute == 30):
         await client.get_channel('939204794051100712').send(helper.getWinners())
