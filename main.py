@@ -37,9 +37,6 @@ async def on_message(message):
             f = discord.File(fh, filename='./quacks/'+str(pic)+'.webp')
         await message.channel.send(file = f)
 
-  # you can even use hours and minutes
-now = datetime.time()
-
 @tasks.loop(minute=1)
 async def send_message():
     if(datetime.now().time().hour == 20 and datetime.now().time().minute == 30):
