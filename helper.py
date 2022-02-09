@@ -59,23 +59,25 @@ def getWinners():
     
     scoresString = str(file1.read())
     scores = scoresString.split("\n")
-    
+  
     players = {}
-    
+    topScore = 10
     for s in scores:
-        players.update({s[:-1]: int(s[-1])})
+        try:
+            players.update({s[:-1]: int(s[-1])})
+            if( int(s[-1]) < topScore):
+                topScore = int(s[-1])
+        except:
+            print("hehe")
     
-    topScore = (max(players.values()))
+
     winners = ''
     for p in players.items():
         if p[1] == topScore:
             winners = winners +"\n`"+ p[0] + "`"
     file1.close()
 
-    print("Today's winners are "+ winners +"\n with a score of "+str(topScore))
+    print("Today's winners are "+ winners +"\nwith a score of "+str(topScore))
 
 
-    
-    
-print( datetime.datetime.now().time().hour )
- 
+
