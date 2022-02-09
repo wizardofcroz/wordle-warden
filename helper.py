@@ -73,6 +73,7 @@ def getWinners():
 
     winners = ''
     for p in players.items():
+        print(p[1])
         if p[1] == topScore:
             winners = winners +"\n`"+ p[0] + "`"
     file1.close()
