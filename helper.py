@@ -48,7 +48,7 @@ def recordScore(message):
     user =  message.author.nick
     score = message.content.split(" ")[2][0]
 
-    file1 = open('./scores/'+today.strftime("%d-%m-%Y")+'.json', 'w' )
+    file1 = open(today.strftime("%d-%m-%Y")+'.json', 'a' )
     #file1 = open(today.strftime("%d-%m-%Y") +'.txt', 'a' )
     file1.write(user+score+"\n")
     file1.close()
