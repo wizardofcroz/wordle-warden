@@ -68,7 +68,7 @@ def getWinners():
             if( int(s[-1]) < topScore):
                 topScore = int(s[-1])
         except:
-            nothing = true
+            nothing = True
     
 
     winners = ''
