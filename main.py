@@ -32,7 +32,7 @@ async def on_message(message):
             await message.channel.send("What "+ str(message.author.nick) + " meant to say was\n`" +helper.toFiveCharLine( str(message.content)) +"`\nbut they used the wrong format") 
             await message.delete()
     
-     if ( message.content.lower().startswith('scores') and str(message.channel.id) == '939204794051100712'):
+    if ( message.content.lower().startswith('scores') and str(message.channel.id) == '939204794051100712'):
             await message.channel.send(helper.getWinners())
     
     if (str(message.channel) == 'g_fuel' and "quack" in message.content.lower()):
