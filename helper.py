@@ -68,12 +68,12 @@ def getWinners():
             if( int(s[-1]) < topScore):
                 topScore = int(s[-1])
         except:
-            print("hehe")
+            nothing = true
     
 
     winners = ''
     for p in players.items():
-        print(p[1])
+        print(p+ " "+ p[0])
         if p[1] == topScore:
             winners = winners +"\n`"+ p[0] + "`"
     file1.close()
