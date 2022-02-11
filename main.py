@@ -36,8 +36,7 @@ async def on_message(message):
                 await message.channel.send("6th try loser " + str(message.author.nick))
         elif message.content.lower().startswith('scores'):
             await message.channel.send(helper.get_winners())
-        else:
-            if message.author != client.user and not helper.is_five_letters(message.content):
+        elif message.author != client.user and not helper.is_five_letters(message.content):
                 await message.channel.send(
                     "What " + str(message.author.nick) + " meant to say was\n`" + helper.to_five_char_line(
                         str(message.content)) + "`\nbut they used the wrong format")

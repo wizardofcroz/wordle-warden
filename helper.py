@@ -26,6 +26,6 @@ def get_winners():
     with open(f'{date.today().strftime("%d-%m-%Y")}.csv', 'r') as file:
         reader = csv.reader(file)
         scores = [(x[0], x[1]) for x in reader]  # List of tuples in form (name, score)
-        topScore = max(x[1] for x in scores)  # Get maximum score value from list of scores
+        topScore = max([x[1] for x in scores])  # Get maximum score value from list of scores
         winners = set([x[0] for x in scores if x[1] == topScore])  # List of names with score == topScore
         return """Today's winners are {0}\n with a score of: {1}""".format("\n".join(winners), str(topScore))
