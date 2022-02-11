@@ -4,12 +4,12 @@
 A discord bot API key must be created in a file `discord.key`. The file should only contain the key as text. It will be `cat`'d into the docker with the run command.
 
 ## Using pre-built docker image (reccomended)
-- `docker run -d ccrosby/wordle-warden -e DISCORD_KEY=${cat discord.key}` (assuming connor set the secrets up, otherwise use `jamesdesmond`)
+- `docker run --env DISCORD_KEY=$(cat discord.key) -d ccrosby/wordle-warden` (assuming connor set the secrets up, otherwise use `jamesdesmond`)
 
 ## Building docker container locally
 - `git clone` the repo and `cd` into it
 - `docker build -t wordle-warden .`
-- `docker run -d wordle-warden -e DISCORD_KEY=${cat discord.key}` (-d runs in background)
+- `docker run --env DISCORD_KEY=$(cat discord.key) -d ccrosby/wordle-warden` (-d runs in background)
 
 ## TODO:
 - Add function which writes wordle messages to disk.
