@@ -30,7 +30,7 @@ async def on_message(message):
     elif( message.content.lower().startswith('scores') and str(message.channel.id) == '939204794051100712'):
             await message.channel.send(helper.getWinners())
     else :
-        if message.author != client.user and not helper.isFiveLetters(message.content) and str(message.channel.id) == '939204794051100712' :
+        if message.author != client.user and not helper.isFiveLetters(message.content):
             await message.channel.send("What "+ str(message.author.nick) + " meant to say was\n`" +helper.toFiveCharLine( str(message.content)) +"`\nbut they used the wrong format") 
             await message.delete()
     
