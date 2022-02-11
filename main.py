@@ -5,7 +5,11 @@ import random
 from discord.ext import tasks
 import secrets
 import helper as helper 
+import sys
 api_key = secrets.api_key
+
+if api_key == '':
+    sys.exit("Error: api_key not found")
 
 # no-ribbits = 445995937819656198
 # only-5-letters-type-like-ur-having-a-stroke =  939204794051100712
