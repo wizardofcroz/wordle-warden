@@ -13,7 +13,7 @@ if api_key == '':
 
 # no-ribbits = 445995937819656198
 # only-5-letters-type-like-ur-having-a-stroke =  939204794051100712
-#test-halariousBot-channel = 920354525305528400
+# test-halariousBot-channel = 920354525305528400
 
 client = discord.Client()
 
