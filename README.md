@@ -1,21 +1,15 @@
 # wordle-warden
 
 ## Configuring secrets
-A discord bot API key must be created in a file `secrets.py` and contain the string variable `api_key`. Program will exit if value empty.
+A discord bot API key must be created in a file `discord.key`. The file should only contain the key as text. It will be `cat`'d into the docker with the run command.
 
 ## Using pre-built docker image (reccomended)
-- `docker run -d ccrosby/wordle-warden` (assuming connor set the secrets up, otherwise use `jamesdesmond`)
+- `docker run -d ccrosby/wordle-warden -e DISCORD_KEY=${cat discord.key}` (assuming connor set the secrets up, otherwise use `jamesdesmond`)
 
 ## Building docker container locally
 - `git clone` the repo and `cd` into it
 - `docker build -t wordle-warden .`
-- `docker run -d wordle-warden` (-d runs in background)
-
-
-### Automatic Linting
-This project automatically lints all new and edited files on each commit. 
-
-[Here is how to run the linter locally](https://github.com/github/super-linter/blob/main/docs/run-linter-locally.md)
+- `docker run -d wordle-warden -e DISCORD_KEY=${cat discord.key}` (-d runs in background)
 
 ## TODO:
 - Add function which writes wordle messages to disk.
