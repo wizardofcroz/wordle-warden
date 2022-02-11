@@ -3,11 +3,11 @@ from datetime import time
 import discord
 import random
 from discord.ext import tasks
-import secrets
 import helper as helper
 import sys
-api_key = secrets.api_key
+import os
 
+api_key = os.getenv('DISCORD_KEY')
 if api_key == '':
     sys.exit("Error: api_key not found")
 
