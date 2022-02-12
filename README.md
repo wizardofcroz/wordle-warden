@@ -22,5 +22,5 @@ A discord bot API key must be created in a file `discord.key`. The file should o
     - Possible consideration to data structure:
         - does not capture the date of score
             - Possibly [scores] should be in form `[{date:score}]`
-            - Full schema: `[(username,{date:score})]`
+            - Full schema: `{username: [{date:score}]}`
 - Auto-mark the day's word as spoilertext in worldle channel?
