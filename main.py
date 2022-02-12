@@ -37,6 +37,8 @@ async def on_message(message):
                 await message.channel.send(f"6th try loser {str(message.author.nick)}")
         elif message.content.lower().startswith('scores'):
             await message.channel.send(helper.get_winners())
+        elif message.content.lower().startswith('leaderboard'):
+            await message.channel.send(helper.get_leaderboard())
         elif message.author != client.user and not helper.is_five_letters(message.content):
                 await message.channel.send(
                     "What {0} meant to say was\n`{1}`\nbut they used the wrong format").format(
@@ -45,9 +47,8 @@ async def on_message(message):
                 await message.delete()
 
     if str(message.channel) == 'g_fuel' and "quack" in message.content.lower():
-        files = glob.glob("./quacks/*.webp")
-        with open(random.choice(files), "rb") as fh:
-            f = discord.File(fh, filename=f'./quacks/{str(pic)}.webp')
+        with open(random.choice(glob.glob("./quacks/*.webp")), "rb") as fh:
+            f = discord.File(fh, filename=fh.name)
         await message.channel.send(file=f)
 
 
