@@ -11,16 +11,19 @@ A discord bot API key must be created in a file `discord.key`. The file should o
 - `docker build -t wordle-warden .`
 - `docker run --env DISCORD_KEY=$(cat discord.key) -d alizzardwizzard/wordle-warden` (-d runs in background)
 
-## TODO:
+### TODO:
 - Add function which writes wordle messages to disk.
     - Use these messages as test data for a pytest suite for unit+regression testing (some weird unicode stuff would be good here)
+- Auto-mark the day's word as spoilertext in worldle channel?
+- Convert all the .txt files to .csv format one-time
+
+### DONE:
 - Generate a leaderboard or parse all score files for lifetime stats
     - e.g. Who has lowest overall avg. score? (and inverse)
-    - Convert all the .txt files to .csv format one-time
+    
     - Script then parses all .csv files and generates report
     - Data structure: List of tuples in form: `[(username,[scores])]`
     - Possible consideration to data structure:
         - does not capture the date of score
             - Possibly [scores] should be in form `[{date:score}]`
             - Full schema: `{username: [{date:score}]}`
-- Auto-mark the day's word as spoilertext in worldle channel?
