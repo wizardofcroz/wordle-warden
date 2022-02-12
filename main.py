@@ -48,7 +48,7 @@ async def on_message(message):
 
     if str(message.channel) == 'g_fuel' and "quack" in message.content.lower():
         with open(random.choice(glob.glob("./quacks/*.webp")), "rb") as fh:
-            f = discord.File(fh, filename=fh.name)
+            f = discord.File(fh, filename=os.path.basename(fh.name))
         await message.channel.send(file=f)
 
 
