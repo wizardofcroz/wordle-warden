@@ -1,8 +1,8 @@
 from datetime import datetime
-import dartetime 
 from datetime import time
 import discord
 import random
+from discord.ext import tasks
 import secrets
 import helper as helper 
 api_key = secrets.api_key
@@ -34,20 +34,14 @@ async def on_message(message):
             await message.channel.send("What "+ str(message.author.nick) + " meant to say was\n`" +helper.toFiveCharLine( str(message.content)) +"`\nbut they used the wrong format") 
             await message.delete()
     
+    if ( message.content.lower().startswith('scores') and str(message.channel.id) == '939204794051100712'):
+            await message.channel.send(helper.getWinners())
+    
     if (str(message.channel) == 'g_fuel' and "quack" in message.content.lower()):
         pic = random.randrange(1,11)
         with open('./quacks/'+str(pic)+'.webp', "rb") as fh:
             f = discord.File(fh, filename='./quacks/'+str(pic)+'.webp')
         await message.channel.send(file = f)
-
-  # you can even use hours and minutes
-now = datetime.time()
-
-@tasks.loop(minute=1)
-async def send_message():
-    if(datetime.now().time().hour == 20 and datetime.now().time().minute == 30):
-        await client.get_channel('939204794051100712').send(helper.getWinners())
-
 
 
 client.run(api_key)
