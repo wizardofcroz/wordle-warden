@@ -24,6 +24,19 @@ def record_score(message):
         writer.writeline([user, score])
     return score
 
+'''#waffle227 3/5
+
+🟩🟩🟩🟩🟩
+🟩⭐🟩⬜🟩
+🟩🟩⭐🟩🟩
+🟩⬜🟩⭐🟩
+🟩🟩🟩🟩🟩
+
+🔥 streak: 5
+wafflegame.net'''
+def get_waffle_streak(message):
+    s = message.index("streak") + 8
+    return s
 
 def get_winners():
     with open(f'./data/{date.today().strftime("%d-%m-%Y")}.csv', 'r') as file:
