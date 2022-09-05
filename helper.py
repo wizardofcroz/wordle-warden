@@ -1,83 +1,52 @@
 from datetime import date
 from datetime import time
 import datetime
+import textwrap
+import csv
+import glob
+import os
+
+from numpy import average
+
+def to_five_char_line(text):
+    return textwrap.wrap(text, width=5)
 
 
-def toFiveCharLine_( text ):
-    fiveCharline = ''
-    for i in range(0, len(text)):
-        if (i%5 != 0):
-            if text[i] == ' ':
-                fiveCharline = fiveCharline + "\n"
-            else: 
-                fiveCharline = fiveCharline + text[i]
-        else:
-           fiveCharline = fiveCharline + text[i] + "\n"
-    
-    return fiveCharline
-
-def toFiveCharLine( text ):
-    fiveCharline = ''
-    splitList = str(text).split(' ')
-    for word in splitList:
-        newWord = ''
-        for i in range(0, len(word)):
-            if (i%5 != 0 or i==0):
-                newWord = newWord + word[i]
-            else:
-                newWord = newWord + word[i] + "\n"
-        fiveCharline = fiveCharline + newWord + "\n"
-    return fiveCharline
+def is_five_letters(text):
+    return all(len(line) <= 5 for line in str(text).splitlines())
 
 
-
-def isFiveLetters ( text ) : 
-    isGood = True
-    checkList = str(text).split('\n')
-
-    for line in checkList:
-        if len(line) > 5 :
-            isGood = False
-    return isGood
-
-'''param message is a Wordle score of the format 
-   'Wordle 231 6/6\n ⬛🟩🟨⬛⬛\n 🟩🟩⬛🟨⬛\n 🟩🟩🟩⬛⬛\n 🟩🟩🟩⬛⬛\n 🟩🟩🟩⬛⬛\n 🟩🟩🟩🟩🟩'
-'''
-def recordScore(message):
-    today = date.today()
-    user =  message.author.nick
+def record_score(message):
+    user = message.author.nick
     score = message.content.split(" ")[2][0]
+    with open(f'./data/{date.today().strftime("%d-%m-%Y")}.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writeline([user, score])
+    return score
 
-    file1 = open(today.strftime("%d-%m-%Y")+'.txt', 'a' )
-    #file1 = open(today.strftime("%d-%m-%Y") +'.txt', 'a' )
-    file1.write(user+score+"\n")
-    file1.close()
 
-def getWinners():
-    today = date.today()
-    file1 = open(today.strftime("%d-%m-%Y") +'.txt', 'r' )
+def get_winners():
+    with open(f'./data/{date.today().strftime("%d-%m-%Y")}.csv', 'r') as file:
+        reader = csv.reader(file)
+        scores = [(x[0], x[1]) for x in reader]  # List of tuples in form (name, score)
+        topScore = max([x[1] for x in scores])  # Get maximum score value from list of scores
+        winners = set([x[0] for x in scores if x[1] == topScore])  # List of names with score == topScore
+        return """Today's winners are {0}\n with a score of: {1}""".format("\n".join(winners), str(topScore))
+
+def get_leaderboard():
+    def get_average_by_player(events,player):
+        return average([event[2] for event in events if event[1] == player]) # get the average of all their scores ever
     
-    scoresString = str(file1.read())
-    scores = scoresString.split("\n")
-  
-    players = {}
-    topScore = 10
-    for s in scores:
-        try:
-            players.update({s[:-1]: int(s[-1])})
-            if( int(s[-1]) < topScore):
-                topScore = int(s[-1])
-        except:
-            print("hehe")
-    
-
-    winners = ''
-    for p in players.items():
-        if p[1] == topScore:
-            winners = winners +"\n`"+ p[0] + "`"
-    file1.close()
-
-    print("Today's winners are "+ winners +"\nwith a score of "+str(topScore))
-
-
-
+    files = glob.glob('./data/*.csv')
+    data = dict()  # {username: [{date:score}]}
+    events = []
+    for file in files:
+        with open(file,'r') as fh:
+            reader = csv.reader(fh)
+            for row in reader:
+                # Appends a tuple to list in form: (filename,username,score)
+                events.append(str(os.path.basename(fh.name),str(row[0]),int(row[1])))
+    players = [] # need empty definition to not have undefined error below
+    players = [event[1] for event in events if event[1] not in players] # Get list of all players
+    average_scores = sorted({player:get_average_by_player(events,player) for [player] in players}.items, key=lambda item: item[1]) # Get a sorted dict of players and scores
+    return """Leaderboard:\n{0}""".format('\n'.join([f'{i} : {average_scores[i]}'] for i in average_scores))
