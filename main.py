@@ -27,6 +27,8 @@ async def on_message(message):
         helper.recordScore(message)
         if( len(message.content) > len(sixth_try)-4 ):
             await message.channel.send("6th try loser "+ str(message.author.nick))
+    elif ( message.content.startswith('#waffle') and str(message.channel.id) == '939204794051100712' ) :
+        message.channel.send("🧇")
     else :
         if message.author != client.user and not helper.isFiveLetters(message.content) and str(message.channel.id) == '939204794051100712' :
             await message.channel.send("What "+ str(message.author.nick) + " meant to say was\n`" +helper.toFiveCharLine( str(message.content)) +"`\nbut they used the wrong format") 
