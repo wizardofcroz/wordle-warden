@@ -30,6 +30,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
     if str(message.channel.id) == '939204794051100712':
         if message.content.startswith('Wordle'):
             score = helper.record_score(message)
@@ -37,6 +38,8 @@ async def on_message(message):
                 await message.channel.send(f"6th try loser {str(message.author.nick)}")
         elif message.content.lower().startswith('scores'):
             await message.channel.send(helper.get_winners())
+        elif ( message.content.startswith('#waffle') and str(message.channel.id) == '939204794051100712' ) :
+            message.channel.send("🧇")
         elif message.content.lower().startswith('leaderboard'):
             await message.channel.send(helper.get_leaderboard())
         elif message.author != client.user and not helper.is_five_letters(message.content):
