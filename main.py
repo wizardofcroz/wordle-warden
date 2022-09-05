@@ -39,10 +39,7 @@ async def on_message(message):
         elif message.content.lower().startswith('scores'):
             await message.channel.send(helper.get_winners())
         elif ( message.content.startswith('#waffle') and str(message.channel.id) == '939204794051100712' ) :
-            send = ''
-            for i in range(0, helper.get_waffle_streak(str(message.content))):
-                send += "🧇"
-            await message.channel.send(send)
+            await message.channel.send(''.join(['🧇' for x in range(helper.get_waffle_streak(str(message.content)))]))
         elif message.content.lower().startswith('leaderboard'):
             await message.channel.send(helper.get_leaderboard())
         elif message.author != client.user and not helper.is_five_letters(message.content):
